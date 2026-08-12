@@ -66,10 +66,11 @@ until the user completes a session or explicitly resets.
 The public-release facts are verified as of 2026-08-12. Before refreshing content:
 
 1. Check the official July/current UiPath cloud release overview.
-2. Check each referenced official product/doc page in
+2. Check the current Maestro Case component dictionary and SLA/escalation guide for lifecycle and capability claims.
+3. Check each referenced official product/doc page in
    `skills/uipath-demo-practice/references/content.js`.
-3. Preserve Preview versus GA labels and update `VERIFIED_AS_OF` plus every source `checked` date.
-4. Run `npm.cmd run validate` and `npm.cmd test`.
+4. Preserve Preview versus GA labels and update `VERIFIED_AS_OF` plus every source `checked` date.
+5. Run `npm.cmd run validate` and `npm.cmd test`.
 
 ## Public-release check
 

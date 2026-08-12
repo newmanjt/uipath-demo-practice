@@ -121,6 +121,9 @@ Facts retain official UiPath source links and explicit GA or Preview labels. The
 every completed debrief. Cloud capabilities change continuously; verify the linked official sources before relying on
 the content for a customer-facing claim.
 
+In the current snapshot, **Maestro Case is generally available** and **Maestro Flow remains Preview**. Their lifecycle
+labels are tested independently and sourced from current, product-specific UiPath documentation.
+
 ## Privacy and responsible play
 
 - The skill does not write or export transcripts unless the user explicitly asks.
