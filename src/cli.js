@@ -74,7 +74,7 @@ async function runPractice(rl, config, save = true) {
   say(); say(`${color.bold('Business stake:')} ${scenario.stake}`);
   say(`${color.bold('Your role:')} ${role.name} — ${role.objective}`);
   say(`${color.bold('Buyer:')} ${personality.name} — ${personality.style}`);
-  say(`${color.bold('Relevant portfolio:')} ${scenario.products.map((id) => { const p = products.find((x) => x.id === id); return `${p.name}${p.status === 'Preview' ? ' [PREVIEW]' : ''}`; }).join(' • ')}`);
+  say(`${color.bold('Relevant GA portfolio:')} ${scenario.products.map((id) => products.find((x) => x.id === id).name).join(' • ')}`);
 
   while (!session.complete) {
     const stage = currentStage(session);

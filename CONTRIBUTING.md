@@ -29,10 +29,10 @@ Use `npm` instead of `npm.cmd` on macOS or Linux.
 When adding or changing a product fact:
 
 1. Use an official `uipath.com` or `docs.uipath.com` source.
-2. Confirm whether the capability is GA or Preview.
+2. Confirm the capability is generally available; do not add limited-availability or unreleased content.
 3. Update the source check date and the catalog snapshot date.
 4. Keep detailed facts in `skills/uipath-demo-practice/references/content.js` rather than duplicating them in the interaction instructions.
-5. Run all validation commands and describe the exact sources reviewed in the pull request.
+5. Confirm the sources are publicly accessible without authentication, run all validation commands, and describe the exact sources reviewed in the pull request.
 
 ## Pull requests
 

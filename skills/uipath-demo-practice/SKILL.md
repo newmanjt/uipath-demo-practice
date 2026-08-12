@@ -1,6 +1,6 @@
 ---
 name: uipath-demo-practice
-description: Run realistic, private, game-based UiPath customer-demo rehearsals as an interactive buyer and evidence-based coach. Use when a seller, solution consultant, customer success manager, or partner asks to enter the demo arena, play a sales-call challenge, practice discovery, demo narrative, product positioning, objection handling, an executive conversation, a demo close, a UiPath knowledge check, or a complete guided or freestyle mock customer session.
+description: Run realistic, private, game-based UiPath customer-demo rehearsals as an interactive buyer and evidence-based coach using only generally available capabilities supported by public official sources. Use when a seller, solution consultant, customer success manager, or partner asks to enter the demo arena, play a sales-call challenge, practice discovery, demo narrative, product positioning, objection handling, an executive conversation, a demo close, a UiPath knowledge check, or a complete guided or freestyle mock customer session.
 ---
 
 # UiPath Demo Arena
@@ -27,7 +27,7 @@ State only:
 - situation and business stake;
 - learner role and objective;
 - buyer personality and pressure level;
-- relevant UiPath portfolio, labeling every Preview item;
+- relevant generally available UiPath portfolio;
 - path ID and replay seed when available.
 
 Then begin round 1. Do not explain ideal answers before the learner responds.
@@ -55,7 +55,7 @@ Accept `pause`, `quit`, or `restart` at any round. Do not issue a final score fo
 
 ## Run the knowledge check
 
-After round 5, use the first three scenario products returned by the helper. Ask their bundled quiz questions one at a time, wait for each answer, then reveal whether it was correct and give the supplied explanation. Preserve the product lifecycle label.
+After round 5, use the first three scenario products returned by the helper. Ask their bundled quiz questions one at a time, wait for each answer, then reveal whether it was correct and give the supplied explanation.
 
 ## Deliver the scorecard
 
@@ -73,9 +73,10 @@ Treat the score as coaching evidence, not certification or a prediction of field
 ## Protect accuracy and privacy
 
 - Keep rehearsal text in the current conversation. Do not write, transmit, or export a transcript unless the user asks.
-- Treat the bundled product catalog as a snapshot verified on the date returned by the helper, not as confirmed-current truth.
-- For externally delivered or current product claims, verify against the linked official UiPath sources when authorized and web access is available. Otherwise state that verification is still required.
-- Preserve GA versus Preview labels. Never convert a roadmap, preview, or inference into a generally available claim.
+- Treat the bundled product catalog as a GA-only snapshot verified on the date returned by the helper, not as confirmed-current truth.
+- Use only the bundled generally available capabilities and claims supported by their linked, publicly accessible official UiPath sources.
+- For externally delivered or current product claims, verify those public sources when authorized and web access is available. Otherwise state that verification is still required.
+- Do not introduce limited-availability, unreleased, roadmap, internal-only, or inferred product material into a rehearsal.
 - Prefer outcome, mechanism, control, human escalation, and measurable proof over unsupported leadership or autonomy claims.
 - Do not portray this rehearsal as an official UiPath certification or customer approval.
 

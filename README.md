@@ -75,7 +75,7 @@ node scripts\install-skill.mjs
 ```
 
 The installer defaults to `$CODEX_HOME/skills/uipath-demo-practice`, or `~/.codex/skills/uipath-demo-practice` when
-`CODEX_HOME` is unset. It refuses to overwrite an existing installation. Preview the destination without writing:
+`CODEX_HOME` is unset. It refuses to overwrite an existing installation. Inspect the destination without writing:
 
 ```powershell
 node scripts\install-skill.mjs --dry-run
@@ -112,17 +112,15 @@ important improvement areas.
 
 ## Product coverage and freshness
 
-The catalog covers UiPath Agents and Agent Builder, Maestro, Maestro Flow, Maestro Case, ScreenPlay, Studio and Studio
-Web, UiPath for Coding Agents, Autopilot, IXP, Document Understanding, Integration Service and API Workflows,
+The catalog covers UiPath Agents and Agent Builder, Maestro, Maestro Case, ScreenPlay, Studio and Studio Web,
+Autopilot, IXP, Document Understanding, Integration Service and API Workflows,
 Orchestrator, Robots and Automation Cloud Robots, Test Cloud, process intelligence, Action Center, Apps, Data Fabric,
 and Insights.
 
-Facts retain official UiPath source links and explicit GA or Preview labels. The current snapshot date is displayed in
-every completed debrief. Cloud capabilities change continuously; verify the linked official sources before relying on
-the content for a customer-facing claim.
-
-In the current snapshot, **Maestro Case is generally available** and **Maestro Flow remains Preview**. Their lifecycle
-labels are tested independently and sourced from current, product-specific UiPath documentation.
+The catalog includes only generally available capabilities and claims supported by publicly accessible official UiPath
+sources. Pre-release, roadmap, internal-only, and confidential material is excluded. The source-check date is displayed
+in every completed debrief. Cloud capabilities change continuously, so verify the linked sources before relying on a
+claim in an external conversation.
 
 ## Privacy and responsible play
 

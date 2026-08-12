@@ -10,7 +10,7 @@ const productFor = (id) => products.find((x) => x.id === id);
 function stageDefinition(session, index) {
   const { scenario: s, personality: p, role: r } = session.variant;
   const namedProducts = s.products.map(productFor);
-  const productNames = namedProducts.map((x) => `${x.name}${x.status === 'Preview' ? ' (Preview)' : ''}`).join(', ');
+  const productNames = namedProducts.map((x) => x.name).join(', ');
   const metricText = s.metrics.join(', ');
   const primary = namedProducts[0];
   const stages = [
@@ -42,7 +42,7 @@ function stageDefinition(session, index) {
       prompt: `Position a coherent solution using this scenario's relevant products: ${productNames}.`,
       concepts: [primary.name, primary.id, 'because|so that', s.metrics[0], 'governance|control', 'exception|human'],
       choices: [
-        { text: `Start with ${primary.name}${primary.status === 'Preview' ? ' (Preview)' : ''} for ${primary.bestFor.toLowerCase()} Then connect only the supporting UiPath capabilities needed for governed exceptions and measure ${s.metrics[0]}.`, scores: { product: 1, value: .9, adaptability: .7 }, feedback: 'Accurate, outcome-led, and intentionally scoped.' },
+        { text: `Start with ${primary.name} for ${primary.bestFor.toLowerCase()} Then connect only the supporting UiPath capabilities needed for governed exceptions and measure ${s.metrics[0]}.`, scores: { product: 1, value: .9, adaptability: .7 }, feedback: 'Accurate, outcome-led, and intentionally scoped.' },
         { text: `Use ${productNames}; together they can automate the process.`, scores: { product: .58, value: .38 }, feedback: 'The product set fits, but the causal story and operating controls are vague.' },
         { text: `Use an autonomous agent for every step so no human is required.`, scores: { product: .12, value: .18, adaptability: .1 }, feedback: 'Over-automation ignores risk, deterministic work, and human judgment.' }
       ]
@@ -176,7 +176,7 @@ function coachingFor(id, score) {
   const tips = {
     discovery: 'Ask for baseline, exceptions, ownership, risk, and a measurable target before showing.',
     value: 'Connect each capability to one customer outcome and an agreed measure.',
-    product: 'Name the capability accurately, explain why it fits, and label preview status.',
+    product: 'Name the capability accurately, explain why it fits, and keep claims within documented GA behavior.',
     objection: 'Validate the concern, explain the control, and propose a bounded proof.',
     adaptability: 'Mirror this buyer’s priorities and trade detail for the evidence they value.',
     nextStep: 'Name stakeholders, date, evidence, success measures, owners, and a decision.'

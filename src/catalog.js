@@ -35,14 +35,16 @@ export function validateContent() {
 
   const sourceIds = new Set(sources.map((x) => x.id));
   const productIds = new Set(products.map((x) => x.id));
+  const usedSourceIds = new Set(products.flatMap((product) => product.sourceIds));
   for (const source of sources) {
     let host;
     try { host = new URL(source.url).hostname; } catch { errors.push(`Invalid source URL: ${source.id}`); }
     if (host && host !== 'www.uipath.com' && host !== 'docs.uipath.com') errors.push(`Non-official source: ${source.id}`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(source.checked)) errors.push(`Invalid checked date: ${source.id}`);
+    if (!usedSourceIds.has(source.id)) errors.push(`Unused source: ${source.id}`);
   }
   for (const item of products) {
-    if (!['GA', 'Preview'].includes(item.status)) errors.push(`Invalid product status: ${item.id}`);
+    if (item.status !== 'GA') errors.push(`Product is not generally available: ${item.id}`);
     if (!item.sourceIds.length || item.sourceIds.some((id) => !sourceIds.has(id))) errors.push(`Broken sources: ${item.id}`);
     if (!item.quiz || item.quiz.options.length !== 3 || item.quiz.answer < 0 || item.quiz.answer > 2) errors.push(`Invalid quiz: ${item.id}`);
   }

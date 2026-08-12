@@ -18,7 +18,7 @@ npm.cmd start
 
 - `test` runs skill metadata, deterministic mission selection, canonical-content compatibility, catalog, engine,
   scoring, content, and persistence tests with Node's built-in test runner.
-- `skill:validate` checks the skill-owned content, source hosts, lifecycle labels, quizzes, references, rubric weights,
+- `skill:validate` checks the skill-owned content, public source hosts, GA-only status, quizzes, references, rubric weights,
   and 360-variant count.
 - `validate` checks source hosts/dates, product status and quizzes, scenario references, stable IDs, catalog size, and
   representative complete session/debrief state.
@@ -35,7 +35,7 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\quick_valid
 ## Agent-skill smoke checklist
 
 - [ ] Invoke `$uipath-demo-practice` with no configuration; confirm a field-ready freestyle mission starts without a long setup interview.
-- [ ] Confirm the mission brief labels Preview products, includes a path and seed, and then waits after the first buyer turn.
+- [ ] Confirm the mission brief uses only GA products, includes a path and seed, and then waits after the first buyer turn.
 - [ ] Run the same seed twice and confirm the scenario, personality, and role are identical.
 - [ ] Complete five rounds and the three-question knowledge challenge one turn at a time.
 - [ ] Confirm all six dimensions cite transcript evidence and total no more than 100 points.
@@ -49,7 +49,7 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\quick_valid
 - [ ] Complete the three-question knowledge check and inspect all six rubric dimensions.
 - [ ] Configure freestyle mode; confirm feedback lists matched coaching signals rather than claiming semantic certainty.
 - [ ] Open Arena Stats and confirm the completed mission, best score, streak, and recommended focus were stored locally.
-- [ ] Open Catalog & Sources and verify preview labels/source freshness messaging.
+- [ ] Open Catalog & Sources and verify GA-only/public-source freshness messaging.
 - [ ] Enter invalid input and confirm the same menu recovers without exiting.
 - [ ] Start a session and enter Q at a round; confirm it exits the session without saving a result.
 - [ ] Select Reset, enter anything except uppercase `RESET`, and confirm cancellation.
@@ -65,11 +65,11 @@ until the user completes a session or explicitly resets.
 
 The public-release facts are verified as of 2026-08-12. Before refreshing content:
 
-1. Check the official July/current UiPath cloud release overview.
-2. Check the current Maestro Case component dictionary and SLA/escalation guide for lifecycle and capability claims.
+1. Check every retained product against a current official public UiPath product or documentation page.
+2. Confirm each source is reachable without authentication and directly supports its bound catalog claims.
 3. Check each referenced official product/doc page in
    `skills/uipath-demo-practice/references/content.js`.
-4. Preserve Preview versus GA labels and update `VERIFIED_AS_OF` plus every source `checked` date.
+4. Reject limited-availability or unreleased capabilities; update `VERIFIED_AS_OF` plus every source `checked` date.
 5. Run `npm.cmd run validate` and `npm.cmd test`.
 
 ## Public-release check

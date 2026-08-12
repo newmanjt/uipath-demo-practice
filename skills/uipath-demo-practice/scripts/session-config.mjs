@@ -113,6 +113,7 @@ function validate() {
 
   const sourceIds = new Set(sources.map((source) => source.id));
   const productIds = new Set(products.map((product) => product.id));
+  const usedSourceIds = new Set(products.flatMap((product) => product.sourceIds));
   if (scenarios.length < 20) errors.push('At least 20 scenarios are required');
   if (personalities.length < 6) errors.push('At least 6 personalities are required');
   if (roles.length < 3) errors.push('At least 3 roles are required');
@@ -123,9 +124,10 @@ function validate() {
     try { url = new URL(source.url); } catch { errors.push(`Invalid source URL: ${source.id}`); continue; }
     if (!['www.uipath.com', 'docs.uipath.com'].includes(url.hostname)) errors.push(`Non-official source: ${source.id}`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(source.checked)) errors.push(`Invalid source date: ${source.id}`);
+    if (!usedSourceIds.has(source.id)) errors.push(`Unused source: ${source.id}`);
   }
   for (const product of products) {
-    if (!['GA', 'Preview'].includes(product.status)) errors.push(`Invalid lifecycle status: ${product.id}`);
+    if (product.status !== 'GA') errors.push(`Product is not generally available: ${product.id}`);
     if (!product.sourceIds.length || product.sourceIds.some((id) => !sourceIds.has(id))) errors.push(`Broken product sources: ${product.id}`);
     if (!product.quiz || product.quiz.options?.length !== 3 || ![0, 1, 2].includes(product.quiz.answer)) errors.push(`Invalid quiz: ${product.id}`);
   }

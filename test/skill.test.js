@@ -16,12 +16,15 @@ function runHelper(...args) {
 test('skill metadata is complete and UI metadata invokes the skill', async () => {
   const skill = await readFile(new URL('SKILL.md', skillUrl), 'utf8');
   const yaml = await readFile(new URL('agents/openai.yaml', skillUrl), 'utf8');
+  const rubric = await readFile(new URL('references/coaching-rubric.md', skillUrl), 'utf8');
+  const helper = await readFile(new URL('scripts/session-config.mjs', skillUrl), 'utf8');
   const packageJson = JSON.parse(await readFile(new URL('package.json', skillUrl), 'utf8'));
   assert.match(skill, /^---\r?\nname: uipath-demo-practice\r?\ndescription: .+\r?\n---/);
   assert.doesNotMatch(skill, /\[TODO/);
   assert.match(yaml, /display_name: "UiPath Demo Arena"/);
   assert.match(yaml, /\$uipath-demo-practice/);
   assert.equal(packageJson.type, 'module');
+  assert.doesNotMatch([skill, rubric, helper, JSON.stringify(skillContent.products)].join('\n'), /\bpreview\b/i);
 });
 
 test('skill owns the canonical content exported through the CLI adapter', () => {
@@ -49,5 +52,7 @@ test('session helper validates content and resolves replayable missions', () => 
   assert.equal(mission.stages.length, 5);
   assert.equal(mission.rubric.reduce((sum, item) => sum + item.weight, 0), 100);
   assert.ok(mission.products.length >= 3);
+  assert.ok(mission.products.every((product) => product.status === 'GA'));
+  assert.ok(mission.sourceSnapshot.sources.every((source) => ['www.uipath.com', 'docs.uipath.com'].includes(new URL(source.url).hostname)));
   assert.equal(mission.sourceSnapshot.verifiedAsOf, skillContent.VERIFIED_AS_OF);
 });

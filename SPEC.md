@@ -23,7 +23,7 @@ provides an optional deterministic interface.
 - [x] Rehearsals run one learner turn at a time through opening, discovery, solution, objection, and close.
 - [x] The coach does not reveal an ideal answer before the learner responds or fabricate learner turns.
 - [x] Completed sessions include three product questions and a 100-point evidence-based rubric across six dimensions.
-- [x] Product facts use official UiPath sources, explicit GA/Preview status, and a visible verification date.
+- [x] Product facts cover only GA capabilities, use publicly accessible official UiPath sources, and expose a visible verification date.
 - [x] The skill does not persist or export transcript text without explicit user direction.
 - [x] The local CLI remains dependency-free, Node.js 20+ compatible, and private by default.
 - [x] A protected installer supports dry-run, custom destination, first install, and overwrite refusal.
@@ -35,16 +35,16 @@ provides an optional deterministic interface.
 - Acting as an official UiPath certification, product, or source of current availability truth.
 - Calling hosted models from repository scripts, requiring UiPath credentials, or writing to CRM systems.
 - Persisting agent-session transcripts or team leaderboards.
-- Publishing customer-specific, confidential, or unreleased product content.
+- Publishing customer-specific, confidential, internal-only, pre-release, roadmap, or unreleased product content.
 
 ## Privacy and accuracy constraints
 
 - Never require credentials or customer data for practice.
 - Keep terminal progress local and ignored by Git.
-- Retain source dates and lifecycle labels when product content changes.
+- Retain source dates and reject any product entry that is not generally available.
 - Treat qualitative scores as coaching evidence, not objective performance measurement.
 - Prefer bounded automation, least privilege, observable controls, and human escalation over unsupported autonomy.
 
 ## Product-content baseline
 
-The bundled catalog carries its own `VERIFIED_AS_OF` date and official source list in `skills/uipath-demo-practice/references/content.js`. A public release must verify those sources and run the full validation suite before changing the date.
+The bundled catalog carries its own `VERIFIED_AS_OF` date and public official source list in `skills/uipath-demo-practice/references/content.js`. A public release must verify unauthenticated access to those sources, confirm every retained capability is GA, and run the full validation suite before changing the date.

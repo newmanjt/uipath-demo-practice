@@ -41,7 +41,7 @@ Look for an explicit link from capability to the customer's stated outcome and a
 
 ### Product accuracy — 20 points
 
-Look for accurate capability names, a reason each selected capability fits, deliberate API/UI/deterministic/agent/human boundaries, and correct GA or Preview labels. Penalize unsupported market, roadmap, autonomy, or production-readiness claims.
+Look for accurate capability names, a reason each selected capability fits, deliberate API/UI/deterministic/agent/human boundaries, and claims grounded in the bundled GA-only public-source catalog. Penalize unsupported market, roadmap, autonomy, availability, or production-readiness claims.
 
 ### Objection handling — 15 points
 
