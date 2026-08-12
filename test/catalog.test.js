@@ -6,16 +6,32 @@ import { personalities, products, roles, scenarios, sources } from '../src/conte
 test('catalog exposes one stable variant per scenario/personality/role tuple', () => {
   const catalog = buildCatalog();
   assert.equal(catalog.length, scenarios.length * personalities.length * roles.length);
-  assert.ok(catalog.length > 300);
+  assert.equal(catalog.length, 600);
   assert.equal(new Set(catalog.map((x) => x.id)).size, catalog.length);
   const resolved = resolveVariant(catalog[42].id);
   assert.equal(resolved.id, catalog[42].id);
   assert.ok(resolved.scenario && resolved.personality && resolved.role);
 });
+
+test('catalog exposes the five UiPath-aligned playable roles', () => {
+  assert.deepEqual(roles.map(({ id, name }) => ({ id, name })), [
+    { id: 'account-executive', name: 'Account Executive' },
+    { id: 'sales-engineer', name: 'Sales Engineer' },
+    { id: 'sales-specialist', name: 'Sales Specialist for <tech>' },
+    { id: 'technical-account-manager', name: 'Technical Account Manager' },
+    { id: 'customer-success', name: 'Customer Success Manager' }
+  ]);
+
+  const specialist = resolveVariant('loan-origination__skeptic__sales-specialist');
+  assert.equal(specialist.role.name, 'Sales Specialist for Maestro Case');
+  assert.deepEqual(specialist.role.technology, { id: 'maestro-case', name: 'Maestro Case' });
+  assert.match(specialist.title, /Sales Specialist for Maestro Case$/);
+});
+
 test('all authored content and official sources validate', () => {
   const result = validateContent();
   assert.deepEqual(result.errors, []);
-  assert.equal(result.counts.variants, 360);
+  assert.equal(result.counts.variants, 600);
 });
 
 test('catalog contains only GA products backed by public official sources', () => {

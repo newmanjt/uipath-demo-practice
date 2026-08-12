@@ -18,7 +18,13 @@ provides an optional deterministic interface.
 - [x] Human-facing copy presents a professional game loop built around missions, five rounds, a knowledge challenge,
   an evidence-based scorecard, and replayable improvement.
 - [x] A bare practice request starts a random field-ready freestyle mission without a long setup interview.
-- [x] Users can select or randomize at least 20 scenarios, 6 buyer personalities, 3 roles, 3 difficulty levels, and guided or freestyle mode.
+- [x] Users can select or randomize at least 20 scenarios, 6 buyer personalities, exactly 5 UiPath-aligned roles,
+  3 difficulty levels, and guided or freestyle mode.
+- [x] Playable roles are Account Executive, Sales Engineer, Sales Specialist for `<tech>`, Technical Account Manager,
+  and Customer Success Manager.
+- [x] Sales Specialist resolves to a requested product in the selected scenario or the scenario's primary product by
+  default, and rejects technologies outside the scenario.
+- [x] The scenario, personality, and role dimensions generate 600 unique stable path IDs.
 - [x] Seeded selection is deterministic and exposes a replayable path ID.
 - [x] Rehearsals run one learner turn at a time through opening, discovery, solution, objection, and close.
 - [x] The coach does not reveal an ideal answer before the learner responds or fabricate learner turns.

@@ -130,7 +130,9 @@ export const personalities = [
 
 export const roles = [
   { id: 'account-executive', name: 'Account Executive', objective: 'Earn agreement on value, stakeholders, and a concrete next step.', emphasis: ['value', 'metric', 'next step'] },
-  { id: 'solution-consultant', name: 'Solution Consultant', objective: 'Map requirements to an accurate, credible demo architecture.', emphasis: ['requirement', 'product', 'architecture'] },
+  { id: 'sales-engineer', name: 'Sales Engineer', objective: 'Translate requirements into an accurate, credible solution and demo architecture.', emphasis: ['requirement', 'product', 'architecture'] },
+  { id: 'sales-specialist', name: 'Sales Specialist for <tech>', objective: 'Establish differentiated value, technical fit, and proof for the selected UiPath technology.', emphasis: ['technology', 'differentiation', 'proof'] },
+  { id: 'technical-account-manager', name: 'Technical Account Manager', objective: 'Protect technical health, adoption, and a scalable path to expanded value.', emphasis: ['technical health', 'risk', 'scale'] },
   { id: 'customer-success', name: 'Customer Success Manager', objective: 'Drive adoption, measurable outcomes, and a scalable operating model.', emphasis: ['adoption', 'outcome', 'governance'] }
 ];
 
@@ -165,6 +167,30 @@ export const scenarios = [
   scenario('automation-ops', 'Operate automation at enterprise scale', 'Banking', 'Automation Platform Owner', 'Hundreds of automations have uneven standards, credentials, monitoring, and ownership.', 'Incidents and audit work grow faster than automation value.', ['orchestrator', 'human-platform', 'robots', 'studio'], ['success rate', 'mean time to recover', 'policy compliance'], 'Central governance will slow every delivery team.'),
   scenario('customer-360', 'Build a customer operations cockpit', 'Utilities', 'Customer Operations Director', 'Agents need a simple experience over fragmented billing, outage, CRM, and document data.', 'Swivel-chair work lengthens calls and creates inconsistent answers.', ['human-platform', 'integration-service', 'robots', 'agents'], ['handle time', 'first-contact resolution', 'adoption'], 'Another app means another screen for agents to learn.')
 ];
+
+export function resolvePlayableRole(role, scenario, technologyId) {
+  if (role.id !== 'sales-specialist') {
+    if (technologyId) throw new Error('--technology can only be used with the sales-specialist role');
+    return role;
+  }
+
+  const availableTechnologies = scenario.products
+    .map((id) => products.find((product) => product.id === id))
+    .filter(Boolean);
+  const technology = technologyId
+    ? availableTechnologies.find((product) => product.id === technologyId)
+    : availableTechnologies[0];
+  if (!technology) {
+    const choices = availableTechnologies.map((product) => product.id).join(', ');
+    throw new Error(`Technology ${technologyId} is not available for ${scenario.id}. Choose: ${choices}`);
+  }
+
+  return {
+    ...role,
+    name: `Sales Specialist for ${technology.name}`,
+    technology: { id: technology.id, name: technology.name }
+  };
+}
 
 export const rubric = [
   { id: 'discovery', name: 'Discovery', weight: 20 },

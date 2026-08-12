@@ -25,8 +25,19 @@ hosted-model integration, or telemetry is required.
 | **Read the scorecard** | Review a 100-point, transcript-grounded debrief with strengths and priority improvements. |
 | **Replay and level up** | Try another path, raise the pressure, or reuse a seed to beat the same challenge with a sharper response. |
 
-Twenty enterprise scenarios, six buyer personalities, and three practitioner roles create **360 stable paths** before
+Twenty enterprise scenarios, six buyer personalities, and five practitioner roles create **600 stable paths** before
 difficulty, play-mode, and learner-response variation.
+
+## Playable UiPath roles
+
+- **Account Executive** — drive business value, stakeholder alignment, and a concrete next step.
+- **Sales Engineer** — translate requirements into an accurate solution and credible demo architecture.
+- **Sales Specialist for `<tech>`** — establish differentiated value, fit, and proof for a selected UiPath technology.
+- **Technical Account Manager** — protect technical health, reduce adoption risk, and scale realized value.
+- **Customer Success Manager** — drive adoption, outcomes, and a sustainable operating model.
+
+For a Sales Specialist mission, name a technology already included in the scenario or let the arena use that
+scenario's primary product.
 
 ## Ways to play
 
@@ -58,6 +69,8 @@ Other challenges:
 
 ```text
 Use $uipath-demo-practice to run an Account Executive pressure test with a skeptical banking buyer.
+
+Use $uipath-demo-practice to run a Sales Specialist for Maestro pressure test with a technical banking buyer.
 
 Use $uipath-demo-practice to give me a guided objection-handling challenge for enterprise agents.
 

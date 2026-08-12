@@ -6,6 +6,7 @@ import {
   difficulties,
   personalities,
   products,
+  resolvePlayableRole,
   roles,
   rubric,
   scenarios,
@@ -20,8 +21,8 @@ function usage(message) {
   console.error(`Usage:
   node scripts/session-config.mjs validate
   node scripts/session-config.mjs list <scenarios|personalities|roles|difficulties|products>
-  node scripts/session-config.mjs select [--seed text] [--scenario id] [--personality id] [--role id] [--difficulty id] [--mode guided|freestyle]
-  node scripts/session-config.mjs show <scenario__personality__role> [--difficulty id] [--mode guided|freestyle]`);
+  node scripts/session-config.mjs select [--seed text] [--scenario id] [--personality id] [--role id] [--technology product-id] [--difficulty id] [--mode guided|freestyle]
+  node scripts/session-config.mjs show <scenario__personality__role> [--technology product-id] [--difficulty id] [--mode guided|freestyle]`);
   process.exitCode = 2;
 }
 
@@ -69,17 +70,18 @@ function pick(items, random) {
   return items[Math.floor(random() * items.length)];
 }
 
-function mission({ seed, scenarioId, personalityId, roleId, difficultyId, mode }) {
+function mission({ seed, scenarioId, personalityId, roleId, technologyId, difficultyId, mode }) {
   const replaySeed = seed || randomBytes(8).toString('hex');
   const random = randomFromSeed(replaySeed);
   const scenario = scenarioId ? find(scenarios, scenarioId, 'scenario') : pick(scenarios, random);
   const personality = personalityId ? find(personalities, personalityId, 'personality') : pick(personalities, random);
-  const role = roleId ? find(roles, roleId, 'role') : pick(roles, random);
+  const baseRole = roleId ? find(roles, roleId, 'role') : pick(roles, random);
   const difficulty = difficultyId ? find(difficulties, difficultyId, 'difficulty') : find(difficulties, 'field', 'difficulty');
   const selectedMode = mode || 'freestyle';
   if (!modes.includes(selectedMode)) throw new Error(`Unknown mode: ${selectedMode}`);
 
   const relevantProducts = scenario.products.map((id) => find(products, id, 'product'));
+  const role = resolvePlayableRole(baseRole, scenario, technologyId);
   const relevantSourceIds = new Set(relevantProducts.flatMap((product) => product.sourceIds));
   return {
     schemaVersion: 1,
@@ -116,7 +118,10 @@ function validate() {
   const usedSourceIds = new Set(products.flatMap((product) => product.sourceIds));
   if (scenarios.length < 20) errors.push('At least 20 scenarios are required');
   if (personalities.length < 6) errors.push('At least 6 personalities are required');
-  if (roles.length < 3) errors.push('At least 3 roles are required');
+  const expectedRoleIds = ['account-executive', 'sales-engineer', 'sales-specialist', 'technical-account-manager', 'customer-success'];
+  if (roles.length !== expectedRoleIds.length || expectedRoleIds.some((id) => !roles.some((role) => role.id === id))) {
+    errors.push('Exactly five UiPath-aligned roles are required');
+  }
   if (rubric.reduce((sum, item) => sum + item.weight, 0) !== 100) errors.push('Rubric weights must total 100');
 
   for (const source of sources) {
@@ -144,7 +149,7 @@ function validate() {
     sources: sources.length,
     variants: scenarios.length * personalities.length * roles.length
   };
-  if (counts.variants <= 300) errors.push(`Only ${counts.variants} stable variants`);
+  if (counts.variants < 600) errors.push(`Only ${counts.variants} stable variants`);
   return { errors, counts };
 }
 
@@ -168,6 +173,7 @@ function show(pathId, flags) {
     scenarioId: matched.scenario.id,
     personalityId: matched.personality.id,
     roleId: matched.role.id,
+    technologyId: flags.technology,
     difficultyId: flags.difficulty,
     mode: flags.mode
   });
@@ -191,6 +197,7 @@ try {
       scenarioId: flags.scenario,
       personalityId: flags.personality,
       roleId: flags.role,
+      technologyId: flags.technology,
       difficultyId: flags.difficulty,
       mode: flags.mode
     }), null, 2));

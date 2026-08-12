@@ -1,22 +1,27 @@
-import { personalities, products, roles, scenarios, sources } from './content.js';
+import { personalities, products, resolvePlayableRole, roles, scenarios, sources } from './content.js';
 
 export function buildCatalog() {
-  return scenarios.flatMap((scenario) => personalities.flatMap((personality) => roles.map((role) => ({
-    id: `${scenario.id}__${personality.id}__${role.id}`,
-    scenarioId: scenario.id,
-    personalityId: personality.id,
-    roleId: role.id,
-    title: `${scenario.title} / ${personality.name} / ${role.name}`
-  }))));
+  return scenarios.flatMap((scenario) => personalities.flatMap((personality) => roles.map((role) => {
+    const playableRole = resolvePlayableRole(role, scenario);
+    return {
+      id: `${scenario.id}__${personality.id}__${role.id}`,
+      scenarioId: scenario.id,
+      personalityId: personality.id,
+      roleId: role.id,
+      title: `${scenario.title} / ${personality.name} / ${playableRole.name}`
+    };
+  })));
 }
 export function resolveVariant(id) {
   const item = buildCatalog().find((entry) => entry.id === id);
   if (!item) throw new Error(`Unknown conversation path: ${id}`);
+  const scenario = scenarios.find((x) => x.id === item.scenarioId);
+  const role = roles.find((x) => x.id === item.roleId);
   return {
     ...item,
-    scenario: scenarios.find((x) => x.id === item.scenarioId),
+    scenario,
     personality: personalities.find((x) => x.id === item.personalityId),
-    role: roles.find((x) => x.id === item.roleId)
+    role: resolvePlayableRole(role, scenario)
   };
 }
 
@@ -31,7 +36,10 @@ export function validateContent() {
 
   if (scenarios.length < 20) errors.push('At least 20 authored scenarios are required');
   if (personalities.length < 6) errors.push('At least 6 personalities are required');
-  if (roles.length < 3) errors.push('At least 3 roles are required');
+  const expectedRoleIds = ['account-executive', 'sales-engineer', 'sales-specialist', 'technical-account-manager', 'customer-success'];
+  if (roles.length !== expectedRoleIds.length || expectedRoleIds.some((id) => !roles.some((role) => role.id === id))) {
+    errors.push('Exactly five UiPath-aligned playable roles are required');
+  }
 
   const sourceIds = new Set(sources.map((x) => x.id));
   const productIds = new Set(products.map((x) => x.id));
@@ -53,7 +61,7 @@ export function validateContent() {
     if (item.metrics.length < 3) errors.push(`Scenario needs three metrics: ${item.id}`);
   }
   const catalog = buildCatalog();
-  if (catalog.length <= 300) errors.push(`Catalog has only ${catalog.length} variants`);
+  if (catalog.length < 600) errors.push(`Catalog has only ${catalog.length} variants`);
   if (new Set(catalog.map((x) => x.id)).size !== catalog.length) errors.push('Catalog IDs must be unique');
   return { errors, counts: { scenarios: scenarios.length, personalities: personalities.length, roles: roles.length, products: products.length, sources: sources.length, variants: catalog.length } };
 }

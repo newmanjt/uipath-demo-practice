@@ -1,6 +1,6 @@
 ---
 name: uipath-demo-practice
-description: Run realistic, private, game-based UiPath customer-demo rehearsals as an interactive buyer and evidence-based coach using only generally available capabilities supported by public official sources. Use when a seller, solution consultant, customer success manager, or partner asks to enter the demo arena, play a sales-call challenge, practice discovery, demo narrative, product positioning, objection handling, an executive conversation, a demo close, a UiPath knowledge check, or a complete guided or freestyle mock customer session.
+description: Run realistic, private, game-based UiPath customer-demo rehearsals as an interactive buyer and evidence-based coach using only generally available capabilities supported by public official sources. Use when an account executive, sales engineer, technology sales specialist, technical account manager, customer success manager, or partner asks to enter the demo arena, play a sales-call challenge, practice discovery, demo narrative, product positioning, objection handling, an executive conversation, a demo close, a UiPath knowledge check, or a complete guided or freestyle mock customer session.
 ---
 
 # UiPath Demo Arena
@@ -14,8 +14,9 @@ letting the theme obscure product accuracy or professional coaching.
 1. Read [coaching-rubric.md](references/coaching-rubric.md).
 2. Resolve a mission with `node scripts/session-config.mjs select`. Add any user-supplied IDs as flags. Use `--seed <text>` when the user requests a repeatable challenge.
 3. If the user asks to browse choices, run `node scripts/session-config.mjs list scenarios`, `personalities`, `roles`, or `difficulties`.
-4. Default missing configuration to a generated random mission, `field` difficulty, and `freestyle` mode. Do not force a setup interview unless the user asks to configure the session.
-5. Use a user-supplied customer context when provided. Mark its path as `custom` and retain the same stages, safeguards, and rubric.
+4. Map the learner to one of the five role IDs returned by `list roles`. For `sales-specialist`, pass `--technology <product-id>` when the user names a technology. The technology must belong to the selected scenario; omit the flag to use that scenario's primary product.
+5. Default missing configuration to a generated random mission, `field` difficulty, and `freestyle` mode. Do not force a setup interview unless the user asks to configure the session.
+6. Use a user-supplied customer context when provided. Mark its path as `custom` and retain the same stages, safeguards, and rubric.
 
 The helper returns the selected scenario, buyer, role, relevant products, official sources, snapshot date, and quiz material. Use [content.js](references/content.js) only when inspecting or refreshing the full catalog.
 
@@ -85,9 +86,11 @@ Treat the score as coaching evidence, not certification or a prediction of field
 ```powershell
 node scripts/session-config.mjs validate
 node scripts/session-config.mjs list scenarios
+node scripts/session-config.mjs list roles
 node scripts/session-config.mjs select --seed "quarterly-practice"
-node scripts/session-config.mjs select --scenario invoice-disputes --personality skeptic --role solution-consultant --difficulty pressure --mode freestyle
-node scripts/session-config.mjs show invoice-disputes__skeptic__solution-consultant
+node scripts/session-config.mjs select --scenario invoice-disputes --personality skeptic --role sales-engineer --difficulty pressure --mode freestyle
+node scripts/session-config.mjs select --scenario loan-origination --personality technical --role sales-specialist --technology maestro --difficulty pressure --mode freestyle
+node scripts/session-config.mjs show invoice-disputes__skeptic__sales-engineer
 ```
 
 Run commands from the skill directory. If Node.js is unavailable, read `references/content.js`, resolve the same IDs manually, and disclose that the random selection is not replayable.

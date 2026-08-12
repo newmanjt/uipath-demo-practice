@@ -18,8 +18,8 @@ npm.cmd start
 
 - `test` runs skill metadata, deterministic mission selection, canonical-content compatibility, catalog, engine,
   scoring, content, and persistence tests with Node's built-in test runner.
-- `skill:validate` checks the skill-owned content, public source hosts, GA-only status, quizzes, references, rubric weights,
-  and 360-variant count.
+- `skill:validate` checks the skill-owned content, five-role mapping, public source hosts, GA-only status, quizzes,
+  references, rubric weights, and 600-variant count.
 - `validate` checks source hosts/dates, product status and quizzes, scenario references, stable IDs, catalog size, and
   representative complete session/debrief state.
 - `smoke` runs a non-interactive five-round conversation, perfect knowledge check, and full debrief without saving.
@@ -37,6 +37,10 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\quick_valid
 - [ ] Invoke `$uipath-demo-practice` with no configuration; confirm a field-ready freestyle mission starts without a long setup interview.
 - [ ] Confirm the mission brief uses only GA products, includes a path and seed, and then waits after the first buyer turn.
 - [ ] Run the same seed twice and confirm the scenario, personality, and role are identical.
+- [ ] List roles and confirm Account Executive, Sales Engineer, Sales Specialist for `<tech>`, Technical Account
+  Manager, and Customer Success Manager are the only choices.
+- [ ] Select a Sales Specialist mission with an explicit scenario technology and without one; confirm the explicit
+  technology is honored and the default uses the scenario's primary product.
 - [ ] Complete five rounds and the three-question knowledge challenge one turn at a time.
 - [ ] Confirm all six dimensions cite transcript evidence and total no more than 100 points.
 - [ ] Confirm the debrief states the current catalog snapshot date and does not claim certification or current-product verification.
@@ -44,7 +48,7 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\quick_valid
 
 ## Manual smoke checklist
 
-- [ ] Home screen shows 360 paths, mission count, personal best, and accepts both numeric actions and Q.
+- [ ] Home screen shows 600 paths, mission count, personal best, and accepts both numeric actions and Q.
 - [ ] Build a guided mission, select all five dimensions, and finish five conversation rounds.
 - [ ] Complete the three-question knowledge check and inspect all six rubric dimensions.
 - [ ] Configure freestyle mode; confirm feedback lists matched coaching signals rather than claiming semantic certainty.

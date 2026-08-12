@@ -30,7 +30,47 @@ test('skill metadata is complete and UI metadata invokes the skill', async () =>
 test('skill owns the canonical content exported through the CLI adapter', () => {
   assert.strictEqual(appContent.scenarios, skillContent.scenarios);
   assert.strictEqual(appContent.products, skillContent.products);
-  assert.equal(skillContent.scenarios.length * skillContent.personalities.length * skillContent.roles.length, 360);
+  assert.equal(skillContent.scenarios.length * skillContent.personalities.length * skillContent.roles.length, 600);
+});
+
+test('session helper lists the mapped roles and resolves Sales Specialist technology', () => {
+  const listed = runHelper('list', 'roles');
+  assert.equal(listed.status, 0, listed.stderr);
+  assert.deepEqual(JSON.parse(listed.stdout).map(({ id, name }) => ({ id, name })), [
+    { id: 'account-executive', name: 'Account Executive' },
+    { id: 'sales-engineer', name: 'Sales Engineer' },
+    { id: 'sales-specialist', name: 'Sales Specialist for <tech>' },
+    { id: 'technical-account-manager', name: 'Technical Account Manager' },
+    { id: 'customer-success', name: 'Customer Success Manager' }
+  ]);
+
+  const selected = runHelper(
+    'select', '--seed', 'specialist-test', '--scenario', 'loan-origination',
+    '--personality', 'skeptic', '--role', 'sales-specialist', '--technology', 'maestro'
+  );
+  assert.equal(selected.status, 0, selected.stderr);
+  const mission = JSON.parse(selected.stdout);
+  assert.equal(mission.pathId, 'loan-origination__skeptic__sales-specialist');
+  assert.equal(mission.role.name, 'Sales Specialist for UiPath Maestro');
+  assert.deepEqual(mission.role.technology, { id: 'maestro', name: 'UiPath Maestro' });
+
+  const defaulted = runHelper(
+    'select', '--seed', 'specialist-default', '--scenario', 'loan-origination', '--role', 'sales-specialist'
+  );
+  assert.equal(defaulted.status, 0, defaulted.stderr);
+  assert.equal(JSON.parse(defaulted.stdout).role.technology.id, 'maestro-case');
+
+  const unavailable = runHelper(
+    'select', '--scenario', 'loan-origination', '--role', 'sales-specialist', '--technology', 'screenplay'
+  );
+  assert.equal(unavailable.status, 2);
+  assert.match(unavailable.stderr, /Technology screenplay is not available for loan-origination/);
+
+  const wrongRole = runHelper(
+    'select', '--scenario', 'loan-origination', '--role', 'sales-engineer', '--technology', 'maestro'
+  );
+  assert.equal(wrongRole.status, 2);
+  assert.match(wrongRole.stderr, /technology can only be used with the sales-specialist role/);
 });
 
 test('session helper validates content and resolves replayable missions', () => {
