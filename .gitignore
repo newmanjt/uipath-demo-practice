@@ -1,0 +1,12 @@
+node_modules/
+.demo-arena/
+coverage/
+*.log
+.agent/
+.agents/
+.codex/
+.env
+.env.*
+!.env.example
+dist/
+*.zip

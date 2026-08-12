@@ -1,0 +1,4 @@
+interface:
+  display_name: "UiPath Demo Practice"
+  short_description: "Practice and coach UiPath customer demos"
+  default_prompt: "Use $uipath-demo-practice to run a field-ready freestyle demo rehearsal."

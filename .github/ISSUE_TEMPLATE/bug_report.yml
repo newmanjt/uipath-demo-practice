@@ -1,0 +1,35 @@
+name: Bug report
+description: Report reproducible behavior that does not match the documented experience.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: checkboxes
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed customer data, credentials, personal data, and confidential information.
+          required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - Agent skill
+        - Terminal application
+        - Installer
+        - Content or product fact
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: Include safe reproduction steps, expected behavior, and actual behavior.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, Node.js version, and agent host if relevant.

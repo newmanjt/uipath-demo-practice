@@ -1,0 +1,25 @@
+name: Scenario or content request
+description: Propose a reusable scenario, buyer challenge, or public product-content correction.
+title: "[Content]: "
+labels: [content]
+body:
+  - type: checkboxes
+    attributes:
+      label: Public-content check
+      options:
+        - label: This request contains no customer-confidential or unreleased information.
+          required: true
+        - label: Product claims include official UiPath sources and lifecycle status where applicable.
+          required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: Proposed scenario or correction
+      description: Describe the reusable learning goal, buyer challenge, and relevant outcomes.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Official sources
+      description: Add official uipath.com or docs.uipath.com links for product claims.

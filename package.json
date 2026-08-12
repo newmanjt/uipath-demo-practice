@@ -1,0 +1,20 @@
+{
+  "name": "uipath-demo-practice",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Private, evidence-based UiPath sales and demo rehearsal skill with an optional local CLI",
+  "repository": "github:newmanjt/uipath-demo-practice",
+  "keywords": ["uipath", "sales-enablement", "demo-practice", "agent-skill"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test",
+    "validate": "node src/validate.js",
+    "skill:validate": "node skills/uipath-demo-practice/scripts/session-config.mjs validate",
+    "install:skill": "node scripts/install-skill.mjs",
+    "smoke": "node src/cli.js --scripted --no-save",
+    "check": "node --check src/cli.js && node --check src/content.js && node --check src/engine.js && node --check src/progress.js && node --check src/validate.js && node --check scripts/install-skill.mjs && node --check skills/uipath-demo-practice/references/content.js && node --check skills/uipath-demo-practice/scripts/session-config.mjs"
+  }
+}

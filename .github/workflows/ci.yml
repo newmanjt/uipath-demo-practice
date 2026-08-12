@@ -1,0 +1,36 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [20, 24]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Run automated tests
+        run: npm test
+      - name: Validate skill catalog
+        run: npm run skill:validate
+      - name: Validate compatibility catalog
+        run: npm run validate
+      - name: Run scripted CLI smoke
+        run: npm run smoke
+      - name: Check JavaScript syntax
+        run: npm run check
