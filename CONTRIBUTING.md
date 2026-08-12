@@ -1,6 +1,7 @@
 # Contributing
 
-Contributions from UiPath employees, partners, customers, and community practitioners are welcome.
+Help build better missions for UiPath Demo Arena. Contributions from UiPath employees, partners, customers, and
+community practitioners are welcome.
 
 ## Before opening a change
 
@@ -35,7 +36,7 @@ When adding or changing a product fact:
 
 ## Pull requests
 
-- Keep changes focused and explain why they improve practice quality.
+- Keep changes focused and explain why they improve the mission, game loop, or coaching quality.
 - Add or update tests for behavior changes.
 - Update README, SPEC, or TESTING when public behavior changes.
 - Confirm the full suite passes and include the commands you ran.

@@ -1,8 +1,10 @@
-# Product specification: UiPath Demo Practice
+# Product specification: UiPath Demo Arena
 
 ## Purpose
 
-Provide a reusable, privacy-conscious practice environment for customer discovery, UiPath positioning, objection handling, and sales-call closeouts. The primary interface is an agent skill; a dependency-free terminal application provides an optional deterministic interface.
+Provide a reusable, privacy-conscious, game-based environment for customer discovery, UiPath positioning, objection
+handling, and sales-call closeouts. The primary interface is an agent skill; a dependency-free terminal application
+provides an optional deterministic interface.
 
 ## Audience
 
@@ -13,6 +15,8 @@ Provide a reusable, privacy-conscious practice environment for customer discover
 ## Acceptance criteria
 
 - [x] The neutral `uipath-demo-practice` skill is self-contained and contains no participant-specific naming.
+- [x] Human-facing copy presents a professional game loop built around missions, five rounds, a knowledge challenge,
+  an evidence-based scorecard, and replayable improvement.
 - [x] A bare practice request starts a random field-ready freestyle mission without a long setup interview.
 - [x] Users can select or randomize at least 20 scenarios, 6 buyer personalities, 3 roles, 3 difficulty levels, and guided or freestyle mode.
 - [x] Seeded selection is deterministic and exposes a replayable path ID.

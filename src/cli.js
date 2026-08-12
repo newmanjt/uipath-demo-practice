@@ -30,7 +30,7 @@ function wrap(text, indent = '') {
 function banner() {
   clear();
   say(color.orange('╭────────────────────────────────────────────────────────────╮'));
-  say(color.orange('│') + color.bold('  UIPATH DEMO ARENA  ') + color.dim('practice • adapt • prove • improve') + color.orange('  │'));
+  say(color.orange('│') + color.bold('  UIPATH DEMO ARENA  ') + color.dim('choose • play • prove • level up') + color.orange('  │'));
   say(color.orange('╰────────────────────────────────────────────────────────────╯'));
   say(color.dim(`Offline trainer • knowledge verified ${VERIFIED_AS_OF}`));
 }
@@ -58,7 +58,7 @@ async function configure(rl) {
   const role = await pick(rl, 'Choose your practitioner role', roles, (x) => `${x.name} — ${x.objective}`); if (!role) return null;
   const personality = await pick(rl, 'Choose the buyer personality', personalities, (x) => `${x.icon} ${x.name} — ${x.style}`); if (!personality) return null;
   const difficulty = await pick(rl, 'Choose pressure level', difficulties, (x) => `${x.name} — ${x.note}`); if (!difficulty) return null;
-  const mode = await pick(rl, 'Choose practice mode', [{ id: 'guided', name: 'Guided', note: 'Choose authored responses and get immediate coaching.' }, { id: 'freestyle', name: 'Freestyle', note: 'Type your answer; transparent concept matching scores it.' }], (x) => `${x.name} — ${x.note}`); if (!mode) return null;
+  const mode = await pick(rl, 'Choose play mode', [{ id: 'guided', name: 'Guided', note: 'Choose authored responses and get immediate coaching.' }, { id: 'freestyle', name: 'Freestyle', note: 'Type your answer; transparent concept matching scores it.' }], (x) => `${x.name} — ${x.note}`); if (!mode) return null;
   const scenario = await pick(rl, 'Choose a customer scenario', scenarios, (x) => `[${x.industry}] ${x.title}`); if (!scenario) return null;
   return { role, personality, difficulty, mode, scenario };
 }
@@ -83,12 +83,12 @@ async function runPractice(rl, config, save = true) {
     let answer;
     if (session.mode === 'guided') {
       stage.choices.forEach((choice, i) => { say(` ${color.orange(String(i + 1))}  ${wrap(choice.text, '    ').trimStart()}`); say(); });
-      const selected = await pickNumber(rl, stage.choices.length, true); if (selected === null) { say(color.dim('Practice abandoned; no result saved.')); return null; }
+      const selected = await pickNumber(rl, stage.choices.length, true); if (selected === null) { say(color.dim('Mission abandoned; no result saved.')); return null; }
       answer = selected;
     } else {
       say(color.dim('Freestyle scoring matches explicit coaching concepts. Be concise but name the mechanism.'));
       const text = (await rl.question(color.cyan('You › '))).trim();
-      if (['q', 'quit', 'back'].includes(text.toLowerCase())) { say(color.dim('Practice abandoned; no result saved.')); return null; }
+      if (['q', 'quit', 'back'].includes(text.toLowerCase())) { say(color.dim('Mission abandoned; no result saved.')); return null; }
       if (!text) { say(color.red('Answer cannot be empty.')); continue; }
       answer = text;
     }
@@ -97,7 +97,7 @@ async function runPractice(rl, config, save = true) {
     say(color.cyan(`Buyer: ${result.reaction}`));
   }
 
-  heading('KNOWLEDGE CHECK', 'Three questions test the products used in this conversation.');
+  heading('KNOWLEDGE CHALLENGE', 'Three questions test the products used in this mission.');
   const questions = quizFor(session); const answers = [];
   for (let i = 0; i < questions.length; i += 1) {
     const q = questions[i];
@@ -110,7 +110,7 @@ async function runPractice(rl, config, save = true) {
   reviewed.forEach((item, i) => say(`${item.correct ? color.green('✓') : color.red('×')} ${i + 1}. ${item.why}`));
   const report = debrief(session);
   printDebrief(report);
-  if (save) { await saveResult(report); say(color.dim('Progress saved locally.')); }
+  if (save) { await saveResult(report); say(color.dim('Arena stats saved locally.')); }
   return report;
 }
 
@@ -130,23 +130,23 @@ function bar(value, size = 20) {
 }
 
 function printDebrief(report) {
-  heading(`DEBRIEF — ${report.total}/100 • ${report.grade}`, `Product knowledge: ${report.quizCorrect}/${report.quizTotal} • Facts verified ${report.verifiedAsOf}`);
+  heading(`SCORECARD — ${report.total}/100 • ${report.grade}`, `Product knowledge: ${report.quizCorrect}/${report.quizTotal} • Facts verified ${report.verifiedAsOf}`);
   for (const item of report.dimensions) {
     say(`${item.name.padEnd(21)} ${bar(item.normalized)} ${String(item.points).padStart(2)}/${item.weight}`);
     say(color.dim(wrap(item.coaching, '  ')));
   }
-  say(); say(`${color.bold('Next practice focus:')} ${report.focus.join(' + ')}`);
+  say(); say(`${color.bold('Next mission focus:')} ${report.focus.join(' + ')}`);
   say(color.dim(`Path: ${report.pathId}`)); say();
 }
 
 async function showProgress(rl) {
   const { progress, warning } = await loadProgress(); const summary = progressSummary(progress);
-  heading('YOUR PROGRESS'); if (warning) say(color.red(warning));
-  say(`Sessions completed  ${color.bold(summary.completed)}`);
+  heading('ARENA STATS'); if (warning) say(color.red(warning));
+  say(`Missions completed  ${color.bold(summary.completed)}`);
   say(`Distinct paths      ${color.bold(summary.practiced)} / ${buildCatalog().length}`);
   say(`Average score       ${color.bold(summary.average)}`);
   say(`Personal best       ${color.bold(summary.bestScore)}`);
-  say(`Practice streak     ${color.bold(summary.streak)} day(s)`);
+  say(`Arena streak        ${color.bold(summary.streak)} day(s)`);
   say(`Recommended focus   ${color.bold(summary.focus)}`);
   await rl.question(color.dim('\nPress Enter to return.'));
 }
@@ -181,14 +181,14 @@ async function scripted() {
 async function main() {
   if (process.argv.includes('--scripted')) { await scripted(); return; }
   const rl = createInterface({ input, output });
-  process.on('SIGINT', () => { say('\nPractice paused. See you next round.'); rl.close(); process.exit(130); });
+  process.on('SIGINT', () => { say('\nArena paused. See you next round.'); rl.close(); process.exit(130); });
   try {
     for (;;) {
       banner();
       const { progress, warning } = await loadProgress(); const summary = progressSummary(progress);
       if (warning) say(color.red(warning));
-      say(`\n${color.bold('HOME')}  ${summary.completed} sessions • best ${summary.bestScore} • ${buildCatalog().length} paths\n`);
-      say(' 1  Configure a practice'); say(' 2  Quick random challenge'); say(' 3  Progress & coaching');
+      say(`\n${color.bold('HOME')}  ${summary.completed} missions • best ${summary.bestScore} • ${buildCatalog().length} paths\n`);
+      say(' 1  Build a mission'); say(' 2  Quick random challenge'); say(' 3  Arena stats & coaching');
       say(' 4  Catalog & sources'); say(' 5  Reset local progress'); say(' Q  Quit');
       const action = (await rl.question(color.cyan('\n› '))).trim().toLowerCase();
       if (['q', 'quit', 'exit'].includes(action)) break;
@@ -200,7 +200,7 @@ async function main() {
       else { say(color.red('Choose 1-5 or Q.')); await rl.question(color.dim('Press Enter to continue.')); }
     }
   } finally { rl.close(); }
-  say('Keep practicing the conversation, not just the click path.');
+  say('Keep playing the conversation, not just the click path.');
 }
 
 main().catch((error) => { console.error(color.red(`Fatal: ${error.message}`)); if (process.env.DEBUG) console.error(error); process.exitCode = 1; });

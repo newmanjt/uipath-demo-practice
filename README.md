@@ -1,31 +1,46 @@
-# UiPath Demo Practice
+# UiPath Demo Arena
 
-Practice customer discovery, product positioning, objection handling, and next-step conversations with an interactive buyer and evidence-based coach.
+**Choose your role. Draw a buyer. Play five rounds. Level up your next customer conversation.**
 
-This repository provides two private, local-first ways to rehearse:
+UiPath Demo Arena turns customer-call rehearsal into a replayable, game-based challenge. Enter a realistic scenario,
+respond to an interactive buyer, test your product knowledge, and finish with an evidence-based scorecard you can use
+to plan your next run.
 
-- an installable agent skill, `uipath-demo-practice`;
-- an optional dependency-free terminal application.
-
-It is designed for UiPath employees, partners, customers, and automation practitioners. No UiPath account, API key, hosted-model integration, or telemetry is required. Rehearsal text stays in the active agent conversation; the terminal application stores progress only on the local machine.
+The arena is designed for UiPath employees, partners, customers, and automation practitioners. Play through an
+installable agent skill or an optional dependency-free terminal application. No UiPath account, API key,
+hosted-model integration, or telemetry is required.
 
 > [!IMPORTANT]
-> This is an independent community practice aid. It is not an official UiPath product, certification, readiness assessment, or statement of product availability. UiPath product content is source-dated and must be rechecked before external use.
+> This is an independent community practice aid. It is not an official UiPath product, certification, readiness
+> assessment, or statement of product availability. UiPath product content is source-dated and must be rechecked
+> before external use.
 
-## What you can practice
+## The game loop
 
-- Full five-round calls: opening, discovery, solution positioning, objection handling, and close.
-- Focused practice across 20 enterprise scenarios and 6 buyer personalities.
-- Account Executive, Solution Consultant, and Customer Success Manager perspectives.
-- Warm-up, field-ready, and pressure-test difficulty.
-- Guided choices or freestyle responses in your own words.
-- Three scenario-relevant product questions and a 100-point evidence-based debrief.
-- Repeatable challenges using a seed.
-- Custom customer contexts while retaining the same coaching safeguards.
+| Stage | Your objective |
+| --- | --- |
+| **Choose your loadout** | Select a practitioner role, customer scenario, buyer personality, pressure level, and play mode. |
+| **Play five rounds** | Navigate the opening, discovery, solution, objection, and close—one learner turn at a time. |
+| **Take the knowledge challenge** | Answer three questions about the UiPath capabilities used in your mission. |
+| **Read the scorecard** | Review a 100-point, transcript-grounded debrief with strengths and priority improvements. |
+| **Replay and level up** | Try another path, raise the pressure, or reuse a seed to beat the same challenge with a sharper response. |
 
-The authored catalog produces 360 stable scenario/personality/role paths before learner-response and difficulty variation.
+Twenty enterprise scenarios, six buyer personalities, and three practitioner roles create **360 stable paths** before
+difficulty, play-mode, and learner-response variation.
 
-## Install the agent skill
+## Ways to play
+
+- **Quick challenge:** jump into a random field-ready freestyle mission.
+- **Custom mission:** choose the industry, buyer, role, difficulty, and guided or freestyle mode.
+- **Guided run:** select from three plausible responses and learn from the tradeoffs.
+- **Freestyle run:** answer in your own words and receive transparent, evidence-based coaching.
+- **Pressure test:** face a less patient buyer who challenges vague claims and weak controls.
+- **Seeded replay:** share or replay the same challenge using a stable seed and path ID.
+
+The arena tracks personal best, average score, distinct paths, practice streak, and recommended focus locally when you
+use the terminal application. It does not publish team leaderboards or claim that a score predicts sales performance.
+
+## Enter the arena with the agent skill
 
 ### Ask Codex to install from GitHub
 
@@ -33,7 +48,21 @@ The authored catalog produces 360 stable scenario/personality/role paths before 
 Install the uipath-demo-practice skill from https://github.com/newmanjt/uipath-demo-practice/tree/main/skills/uipath-demo-practice
 ```
 
-The skill becomes available on the next turn after installation.
+The skill becomes available on the next turn after installation. Start a quick challenge:
+
+```text
+Use $uipath-demo-practice to enter the arena with a field-ready freestyle mission.
+```
+
+Other challenges:
+
+```text
+Use $uipath-demo-practice to run an Account Executive pressure test with a skeptical banking buyer.
+
+Use $uipath-demo-practice to give me a guided objection-handling challenge for enterprise agents.
+
+Use $uipath-demo-practice to replay the challenge with seed quarterly-review.
+```
 
 ### Install from a clone
 
@@ -45,29 +74,14 @@ cd uipath-demo-practice
 node scripts\install-skill.mjs
 ```
 
-The installer defaults to `$CODEX_HOME/skills/uipath-demo-practice`, or `~/.codex/skills/uipath-demo-practice` when `CODEX_HOME` is unset. It refuses to overwrite an existing installation. Preview the destination without writing:
+The installer defaults to `$CODEX_HOME/skills/uipath-demo-practice`, or `~/.codex/skills/uipath-demo-practice` when
+`CODEX_HOME` is unset. It refuses to overwrite an existing installation. Preview the destination without writing:
 
 ```powershell
 node scripts\install-skill.mjs --dry-run
 ```
 
-Then start a rehearsal:
-
-```text
-Use $uipath-demo-practice to run a field-ready freestyle rehearsal.
-```
-
-Other examples:
-
-```text
-Use $uipath-demo-practice to run an Account Executive pressure test with a skeptical banking buyer.
-
-Use $uipath-demo-practice to give me guided objection-handling practice for enterprise agents.
-
-Use $uipath-demo-practice to run a repeatable challenge with seed quarterly-review.
-```
-
-## Run the local terminal application
+## Play in the local terminal
 
 Requires Node.js 20 or newer. No package installation is needed.
 
@@ -78,25 +92,50 @@ npm.cmd test
 npm.cmd start
 ```
 
-On macOS or Linux, use `npm` instead of `npm.cmd`. Terminal progress is stored in `.demo-arena/progress.json`, which is ignored by Git.
+On macOS or Linux, use `npm` instead of `npm.cmd`. Terminal stats are stored in `.demo-arena/progress.json`, which is
+ignored by Git.
+
+## What the score measures
+
+The 100-point debrief uses six evidence-based dimensions:
+
+- discovery;
+- value articulation;
+- product accuracy;
+- objection handling;
+- buyer adaptability;
+- next-step quality.
+
+The score is a coaching device—not a certification, readiness verdict, or prediction of field performance. Every
+dimension cites something the learner actually said, and the debrief recommends the next mission based on the most
+important improvement areas.
 
 ## Product coverage and freshness
 
-The catalog covers UiPath Agents and Agent Builder, Maestro, Maestro Flow, Maestro Case, ScreenPlay, Studio and Studio Web, UiPath for Coding Agents, Autopilot, IXP, Document Understanding, Integration Service and API Workflows, Orchestrator, Robots and Automation Cloud Robots, Test Cloud, process intelligence, Action Center, Apps, Data Fabric, and Insights.
+The catalog covers UiPath Agents and Agent Builder, Maestro, Maestro Flow, Maestro Case, ScreenPlay, Studio and Studio
+Web, UiPath for Coding Agents, Autopilot, IXP, Document Understanding, Integration Service and API Workflows,
+Orchestrator, Robots and Automation Cloud Robots, Test Cloud, process intelligence, Action Center, Apps, Data Fabric,
+and Insights.
 
-Facts retain official UiPath source links and explicit GA or Preview labels. The current snapshot date is displayed in every completed debrief. Cloud capabilities change continuously; verify the linked official sources before relying on the content for a customer-facing claim.
+Facts retain official UiPath source links and explicit GA or Preview labels. The current snapshot date is displayed in
+every completed debrief. Cloud capabilities change continuously; verify the linked official sources before relying on
+the content for a customer-facing claim.
 
-## Privacy and responsible use
+## Privacy and responsible play
 
 - The skill does not write or export transcripts unless the user explicitly asks.
-- The CLI does not transmit responses and stores only local progress.
+- The CLI does not transmit responses and stores only local stats.
 - Do not enter customer-confidential data, credentials, personal data, or unreleased product information.
 - Scores are coaching evidence, not certification or a prediction of sales performance.
-- Product examples teach qualified positioning, human escalation, least privilege, and bounded validation rather than unsupported autonomy claims.
+- Product challenges teach qualified positioning, human escalation, least privilege, and bounded validation rather
+  than unsupported autonomy claims.
 
 See [SECURITY.md](SECURITY.md) for private vulnerability reporting.
 
-## Validate or contribute
+## Build new missions
+
+Scenario ideas, buyer challenges, product corrections, and code contributions are welcome from UiPath employees,
+partners, customers, and community practitioners. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ```powershell
 npm.cmd test
@@ -106,4 +145,4 @@ npm.cmd run smoke
 npm.cmd run check
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution and content-refresh requirements. The project is available under the [MIT License](LICENSE).
+The project is available under the [MIT License](LICENSE).

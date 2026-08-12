@@ -1,6 +1,6 @@
 ## Purpose
 
-Describe the practice or product-quality improvement and why it matters.
+Describe the mission, game-loop, coaching, or product-quality improvement and why it matters.
 
 ## Verification
 

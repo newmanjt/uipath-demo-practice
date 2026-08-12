@@ -37,18 +37,18 @@ python "$env:USERPROFILE\.codex\skills\.system\skill-creator\scripts\quick_valid
 - [ ] Invoke `$uipath-demo-practice` with no configuration; confirm a field-ready freestyle mission starts without a long setup interview.
 - [ ] Confirm the mission brief labels Preview products, includes a path and seed, and then waits after the first buyer turn.
 - [ ] Run the same seed twice and confirm the scenario, personality, and role are identical.
-- [ ] Complete five rounds and three quiz questions one turn at a time.
+- [ ] Complete five rounds and the three-question knowledge challenge one turn at a time.
 - [ ] Confirm all six dimensions cite transcript evidence and total no more than 100 points.
 - [ ] Confirm the debrief states the current catalog snapshot date and does not claim certification or current-product verification.
 - [ ] Enter `quit` during a round and confirm the skill does not fabricate later responses or a final score.
 
 ## Manual smoke checklist
 
-- [ ] Home screen shows 360 paths and accepts both numeric actions and Q.
-- [ ] Configure a guided practice, select all five dimensions, and finish five conversation rounds.
+- [ ] Home screen shows 360 paths, mission count, personal best, and accepts both numeric actions and Q.
+- [ ] Build a guided mission, select all five dimensions, and finish five conversation rounds.
 - [ ] Complete the three-question knowledge check and inspect all six rubric dimensions.
 - [ ] Configure freestyle mode; confirm feedback lists matched coaching signals rather than claiming semantic certainty.
-- [ ] Open Progress and confirm the completed session, best score, and recommended focus were stored locally.
+- [ ] Open Arena Stats and confirm the completed mission, best score, streak, and recommended focus were stored locally.
 - [ ] Open Catalog & Sources and verify preview labels/source freshness messaging.
 - [ ] Enter invalid input and confirm the same menu recovers without exiting.
 - [ ] Start a session and enter Q at a round; confirm it exits the session without saving a result.

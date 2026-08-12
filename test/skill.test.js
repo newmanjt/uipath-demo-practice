@@ -19,7 +19,7 @@ test('skill metadata is complete and UI metadata invokes the skill', async () =>
   const packageJson = JSON.parse(await readFile(new URL('package.json', skillUrl), 'utf8'));
   assert.match(skill, /^---\r?\nname: uipath-demo-practice\r?\ndescription: .+\r?\n---/);
   assert.doesNotMatch(skill, /\[TODO/);
-  assert.match(yaml, /display_name: "UiPath Demo Practice"/);
+  assert.match(yaml, /display_name: "UiPath Demo Arena"/);
   assert.match(yaml, /\$uipath-demo-practice/);
   assert.equal(packageJson.type, 'module');
 });

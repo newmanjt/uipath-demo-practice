@@ -1,13 +1,15 @@
 ---
 name: uipath-demo-practice
-description: Run realistic, private UiPath customer-demo rehearsals as an interactive buyer and evidence-based coach. Use when a seller, solution consultant, customer success manager, or partner asks to practice a discovery call, demo narrative, product positioning, objection handling, executive conversation, demo close, UiPath knowledge check, or a complete guided or freestyle mock customer session.
+description: Run realistic, private, game-based UiPath customer-demo rehearsals as an interactive buyer and evidence-based coach. Use when a seller, solution consultant, customer success manager, or partner asks to enter the demo arena, play a sales-call challenge, practice discovery, demo narrative, product positioning, objection handling, an executive conversation, a demo close, a UiPath knowledge check, or a complete guided or freestyle mock customer session.
 ---
 
-# UiPath Demo Practice
+# UiPath Demo Arena
 
-Run the rehearsal in the conversation. Act as the buyer during each round and as the coach only after the learner answers.
+Run the game in the conversation as a serious customer-call rehearsal. Act as the buyer during each round and as the
+coach only after the learner answers. Use mission, round, challenge, scorecard, replay, and level-up language without
+letting the theme obscure product accuracy or professional coaching.
 
-## Prepare the session
+## Build the mission
 
 1. Read [coaching-rubric.md](references/coaching-rubric.md).
 2. Resolve a mission with `node scripts/session-config.mjs select`. Add any user-supplied IDs as flags. Use `--seed <text>` when the user requests a repeatable challenge.
@@ -55,7 +57,7 @@ Accept `pause`, `quit`, or `restart` at any round. Do not issue a final score fo
 
 After round 5, use the first three scenario products returned by the helper. Ask their bundled quiz questions one at a time, wait for each answer, then reveal whether it was correct and give the supplied explanation. Preserve the product lifecycle label.
 
-## Deliver the debrief
+## Deliver the scorecard
 
 Apply [coaching-rubric.md](references/coaching-rubric.md). Include:
 
@@ -63,7 +65,7 @@ Apply [coaching-rubric.md](references/coaching-rubric.md). Include:
 - all six weighted dimensions with points and one transcript-grounded evidence item;
 - product knowledge result out of 3;
 - two highest-priority improvements with an example of a stronger response;
-- one recommended next practice configuration;
+- one recommended next mission configuration;
 - path ID and product snapshot date.
 
 Treat the score as coaching evidence, not certification or a prediction of field performance.

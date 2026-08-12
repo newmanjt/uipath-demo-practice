@@ -1,12 +1,12 @@
 {
   "name": "uipath-demo-practice",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "license": "MIT",
   "type": "module",
-  "description": "Private, evidence-based UiPath sales and demo rehearsal skill with an optional local CLI",
+  "description": "Game-based, evidence-backed UiPath sales and demo rehearsal arena with an optional local CLI",
   "repository": "github:newmanjt/uipath-demo-practice",
-  "keywords": ["uipath", "sales-enablement", "demo-practice", "agent-skill"],
+  "keywords": ["uipath", "sales-enablement", "demo-practice", "game-based-learning", "agent-skill"],
   "engines": { "node": ">=20" },
   "scripts": {
     "start": "node src/cli.js",
